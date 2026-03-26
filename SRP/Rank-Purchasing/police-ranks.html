@@ -6,26 +6,119 @@
   <title>SRP | Bournys Productions</title>
   <link rel="stylesheet" href="/css/style.css" />
 
-  <style>
+   <style>
     /* ONLY affects this page */
+
+    .page {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-simple {
+      text-align: center;
+      padding: 120px 20px 20px; /* reduced bottom padding */
+    }
+
+    .hero-simple h2 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .hero-simple p {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.75);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* NEW CLEAN CENTERED BACK BUTTON */
+    .back-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0 80px; /* pushes it down nicely */
+    }
+
     .back-btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 12px 26px;
-      font-size: 14px;
-      font-weight: 600;
+      padding: 14px 34px;
+      font-size: 15px;
+      font-weight: 700;
       color: #fff;
       background: linear-gradient(135deg, #ff1a1a, #990000);
-      border-radius: 8px;
+      border-radius: 14px;
       text-decoration: none;
-      box-shadow: 0 0 12px rgba(255, 0, 0, 0.4);
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
       transition: all 0.25s ease;
     }
 
     .back-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 18px rgba(255, 0, 0, 0.7);
+      box-shadow: 0 0 28px rgba(255, 0, 0, 0.8);
       background: linear-gradient(135deg, #ff3333, #cc0000);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h3 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      color: #fff;
+      margin: 0;
+    }
+
+    .product-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 28px;
+      padding: 0 20px 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      width: 320px;
+      min-height: 220px;
+      border-radius: 22px;
+      background: rgba(18, 18, 30, 0.88);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: 0.25s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .product-content {
+      padding: 30px 24px;
+    }
+
+    .product-content h4 {
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .product-content p {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 20px;
+    }
+
+    .view-btn {
+      padding: 12px 26px;
+      background: #ff2b2b;
+      color: #fff;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
     }
   </style>
 </head>
