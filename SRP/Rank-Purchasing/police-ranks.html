@@ -3,64 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SRP | Bournys Productions</title>
+  <title>Game Description | Bournys Productions</title>
   <link rel="stylesheet" href="/css/style.css" />
 
-   <style>
+  <style>
     /* ONLY affects this page */
 
     .page {
       position: relative;
       z-index: 1;
+      padding-bottom: 80px;
     }
 
     .hero-simple {
       text-align: center;
-      padding: 120px 20px 20px; /* reduced bottom padding */
+      padding: 120px 20px 20px;
     }
 
     .hero-simple h2 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-size: clamp(2.8rem, 7vw, 5rem);
       font-weight: 800;
       color: #fff;
-      margin-bottom: 12px;
+      margin: 0 0 14px;
     }
 
     .hero-simple p {
       font-size: 1rem;
       color: rgba(255, 255, 255, 0.75);
-      max-width: 700px;
+      max-width: 760px;
       margin: 0 auto;
+      line-height: 1.6;
     }
 
-    /* NEW CLEAN CENTERED BACK BUTTON */
     .back-wrap {
       display: flex;
       justify-content: center;
-      margin: 30px 0 80px; /* pushes it down nicely */
+      margin: 30px 0 70px;
     }
 
     .back-btn {
+      display: inline-block;
       padding: 14px 34px;
       font-size: 15px;
       font-weight: 700;
       color: #fff;
+      text-decoration: none;
       background: linear-gradient(135deg, #ff1a1a, #990000);
       border-radius: 14px;
-      text-decoration: none;
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.45);
       transition: all 0.25s ease;
     }
 
     .back-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 28px rgba(255, 0, 0, 0.8);
       background: linear-gradient(135deg, #ff3333, #cc0000);
+      box-shadow: 0 0 28px rgba(255, 0, 0, 0.75);
     }
 
     .section-title {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 50px;
     }
 
     .section-title h3 {
@@ -68,57 +70,84 @@
       font-weight: 800;
       color: #fff;
       margin: 0;
+      position: relative;
+      display: inline-block;
     }
 
-    .product-grid {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 28px;
-      padding: 0 20px 80px;
+    .section-title h3::after {
+      content: "";
+      display: block;
+      width: 90px;
+      height: 4px;
+      margin: 14px auto 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, #ff2a2a, transparent);
+      box-shadow: 0 0 12px rgba(255, 0, 0, 0.45);
+    }
+
+    .info-section {
       max-width: 1100px;
       margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
     }
 
-    .product-card {
-      width: 320px;
-      min-height: 220px;
-      border-radius: 22px;
+    .info-block {
       background: rgba(18, 18, 30, 0.88);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      transition: 0.25s;
+      border-radius: 22px;
+      padding: 28px 24px;
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .product-card:hover {
+    .info-block:hover {
       transform: translateY(-6px);
+      box-shadow:
+        0 16px 35px rgba(0, 0, 0, 0.45),
+        0 0 20px rgba(255, 0, 0, 0.12);
     }
 
-    .product-content {
-      padding: 30px 24px;
-    }
-
-    .product-content h4 {
-      font-size: 1.8rem;
+    .info-block h4 {
+      font-size: 1.4rem;
+      font-weight: 800;
       color: #fff;
-      margin-bottom: 12px;
+      margin: 0 0 14px;
     }
 
-    .product-content p {
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 20px;
+    .info-block p {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.7;
+      margin: 0;
     }
 
-    .view-btn {
-      padding: 12px 26px;
-      background: #ff2b2b;
-      color: #fff;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 700;
+    @media (max-width: 768px) {
+      .hero-simple {
+        padding: 100px 16px 20px;
+      }
+
+      .back-wrap {
+        margin: 25px 0 50px;
+      }
+
+      .section-title {
+        margin-bottom: 35px;
+      }
+
+      .info-section {
+        padding: 0 16px;
+        gap: 20px;
+      }
+
+      .info-block {
+        padding: 24px 20px;
+      }
     }
   </style>
 </head>
@@ -137,7 +166,7 @@
 
   <nav class="sidebar" id="sidebar">
     <a href="/">Home</a>
-    <a href="info">Information</a>
+    <a href="/SRP/info">Information</a>
     <a href="/sba-bb/">Products</a>
     <a href="/contact-us/">Contact Us</a>
     <a href="/login/">Login</a>
@@ -146,44 +175,50 @@
   <main class="page">
     <section class="hero-simple">
       <h2>Game Description</h2>
-      <p>Realism-focused emergency services roleplay in a 1:1 recreation of Shirebrook</p>
-
-      <!-- BACK BUTTON (ONLY ON THIS PAGE) -->
-      <a href="/SRP/Rank-Purchasing/home" class="back-btn">← Back</a>
+      <p>Realism-focused emergency services roleplay in a 1:1 recreation of Shirebrook.</p>
     </section>
-      
+
+    <div class="back-wrap">
+      <a href="/SRP/Rank-Purchasing/home" class="back-btn">← Back</a>
+    </div>
+
     <section class="section-title">
       <h3>Information</h3>
+    </section>
 
+    <section class="info-section">
       <div class="info-block">
         <h4>Overview</h4>
         <p>
-Insert Text init lad       </p>
+          UK:RP | SRP is a realism-focused emergency services roleplay experience built around a 1:1 recreation of Shirebrook. The aim is to provide immersive scenes, detailed locations, and a professional roleplay environment for all players.
+        </p>
       </div>
 
       <div class="info-block">
         <h4>Roles &amp; Services</h4>
         <p>
-         Why r you looking at this? </p>
+          Players can take part in a range of emergency service roles, including policing, fire and rescue, ambulance, and specialist response teams. Each service is designed to offer its own responsibilities, vehicles, and style of roleplay.
+        </p>
       </div>
 
       <div class="info-block">
         <h4>Roleplay &amp; Progression</h4>
-        <p> boo
-</p>
+        <p>
+          The experience is built to reward professional roleplay, teamwork, and progression through activity and involvement. Whether attending incidents, supporting large scenes, or working through specialist pathways, there is always room to develop.
+        </p>
       </div>
 
       <div class="info-block">
         <h4>Community &amp; Events</h4>
         <p>
-        cool text
+          The community is supported through regular updates, organised roleplay sessions, and a growing range of events. This helps keep the experience active, varied, and enjoyable for both new and returning players.
         </p>
       </div>
 
       <div class="info-block">
         <h4>Experience</h4>
         <p>
-how much text did i put into this
+          The goal of SRP is to deliver a polished and engaging UK roleplay experience that feels structured, realistic, and enjoyable. From routine patrols to large-scale incidents, players can expect a detailed environment built for immersive gameplay.
         </p>
       </div>
     </section>
