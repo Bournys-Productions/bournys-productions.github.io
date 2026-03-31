@@ -5,28 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bournys Productions</title>
   <link rel="stylesheet" href="/css/style.css" />
-  
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZV8J9CVQQQ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-ZV8J9CVQQQ');
-</script>
-</head>
-<body>
-  <canvas id="particle-canvas"></canvas>
-
-  <header class="topbar">
-    <button class="menu-btn" id="menuToggle" aria-label="Open menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <h1 class="topbar-title">BOURNYS PRODUCTIONS</h1>
-  </header>
 
   <style>
     /* ONLY affects this page */
@@ -58,6 +36,7 @@
     .section-title {
       text-align: center;
       margin-bottom: 40px;
+      margin-top: 30px;
     }
 
     .section-title h3 {
@@ -154,6 +133,91 @@
       box-shadow: 0 0 18px rgba(255, 0, 0, 0.45);
     }
 
+    /* Cookie banner */
+    #cookie-banner {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 32px);
+      max-width: 900px;
+      background: rgba(18, 18, 30, 0.96);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.45),
+        0 0 20px rgba(255, 0, 0, 0.10);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 18px 20px;
+      z-index: 99999;
+      display: none;
+    }
+
+    .cookie-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-text {
+      flex: 1 1 420px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .cookie-text a {
+      color: #ff4b4b;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .cookie-text a:hover {
+      text-decoration: underline;
+    }
+
+    .cookie-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-btn {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 20px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .cookie-btn.accept {
+      background: #ff2b2b;
+      color: #fff;
+      box-shadow: 0 0 14px rgba(255, 0, 0, 0.25);
+    }
+
+    .cookie-btn.accept:hover {
+      transform: translateY(-2px);
+      background: #ff3b3b;
+      box-shadow: 0 0 18px rgba(255, 0, 0, 0.45);
+    }
+
+    .cookie-btn.decline {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    .cookie-btn.decline:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.14);
+    }
+
     @media (max-width: 768px) {
       .hero-simple {
         padding: 100px 16px 30px;
@@ -177,16 +241,57 @@
       .product-content h4 {
         font-size: 1.5rem;
       }
+
+      #cookie-banner {
+        bottom: 14px;
+        width: calc(100% - 20px);
+        padding: 16px;
+      }
+
+      .cookie-actions {
+        width: 100%;
+      }
+
+      .cookie-btn {
+        flex: 1 1 140px;
+      }
     }
   </style>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZV8J9CVQQQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied'
+    });
+
+    gtag('js', new Date());
+    gtag('config', 'G-ZV8J9CVQQQ');
+  </script>
 </head>
-  
+
+<body>
+  <canvas id="particle-canvas"></canvas>
+
+  <header class="topbar">
+    <button class="menu-btn" id="menuToggle" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <h1 class="topbar-title">BOURNYS PRODUCTIONS</h1>
+  </header>
+
   <nav class="sidebar" id="sidebar">
     <a href="/">Home</a>
     <a href="/police-vehicles/">Police Vehicles</a>
     <a href="/sba-bb/">Products</a>
     <a href="/contact-us/">Contact Us</a>
     <a href="/login/">Login</a>
+    <a href="/privacy/">Privacy Policy</a>
   </nav>
 
   <main class="page">
@@ -207,35 +312,84 @@
           <a href="/SRP/" class="view-btn">View</a>
         </div>
       </div>
+    </section>
 
- <section class="section-title">
+    <section class="section-title">
       <h3>Support</h3>
     </section>
 
+    <section class="product-grid">
       <div class="product-card">
-        <div class="product-image"></div>
         <div class="product-content">
           <h4>Contact Us</h4>
           <p>Open a ticket in our server!</p>
-         <a href="https://discord.gg/gVQMjcGNEs" target="_blank" rel="noopener noreferrer" class="view-btn">Get Support</a>
+          <a href="https://discord.gg/gVQMjcGNEs" target="_blank" rel="noopener noreferrer" class="view-btn">Get Support</a>
         </div>
       </div>
     </section>
-    
-     <section class="section-title">
+
+    <section class="section-title">
       <h3>TOS & Policies</h3>
     </section>
-    
-          <div class="product-card">
-        <div class="product-image"></div>
+
+    <section class="product-grid">
+      <div class="product-card">
         <div class="product-content">
           <h4>TOS & Policies</h4>
           <p>Click to read more</p>
- <a href="/policies/home" class="view-btn">Read More</a>
+          <a href="/policies/home" class="view-btn">Read More</a>
         </div>
       </div>
+    </section>
   </main>
-  
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner">
+    <div class="cookie-inner">
+      <div class="cookie-text">
+        We use analytics cookies to understand how people use the site and improve it.
+        You can accept or decline. Read more in our
+        <a href="/privacy/">Privacy Policy</a>.
+      </div>
+
+      <div class="cookie-actions">
+        <button class="cookie-btn accept" onclick="acceptCookies()">Accept</button>
+        <button class="cookie-btn decline" onclick="declineCookies()">Decline</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function acceptCookies() {
+      gtag('consent', 'update', {
+        'analytics_storage': 'granted'
+      });
+      localStorage.setItem('cookieChoice', 'accepted');
+      document.getElementById('cookie-banner').style.display = 'none';
+    }
+
+    function declineCookies() {
+      localStorage.setItem('cookieChoice', 'declined');
+      document.getElementById('cookie-banner').style.display = 'none';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const choice = localStorage.getItem('cookieChoice');
+      const banner = document.getElementById('cookie-banner');
+
+      if (choice === 'accepted') {
+        gtag('consent', 'update', {
+          'analytics_storage': 'granted'
+        });
+        banner.style.display = 'none';
+      } else if (choice === 'declined') {
+        banner.style.display = 'none';
+      } else {
+        banner.style.display = 'block';
+      }
+    });
+  </script>
+
   <script src="/js/main.js"></script>
 </body>
 </html>
