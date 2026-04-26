@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LOA Form</title>
 
+<!-- 🔴 BP LOGO TAB ICON -->
+<link rel="icon" type="image/png" href="images/BP-LOGO.png">
+
 <style>
 * {
   margin: 0;
@@ -121,19 +124,11 @@ button:hover {
 </div>
 
 <script>
-/* =========================
-   SHARED PASSWORD SYSTEM
-========================= */
-
 const validPasswords = {
   "Samson1322": "Founder / CEO",
   "101Man101": "Management",
   "1001BP_STAFF1001": "BP STAFF"
 };
-
-/* =========================
-   PAGE ACCESS
-========================= */
 
 let staffPassword = prompt("Enter staff access password:");
 
@@ -141,14 +136,9 @@ if (!validPasswords[staffPassword]) {
   document.body.innerHTML = "<h2 style='color:red;text-align:center;'>Access Denied</h2>";
 }
 
-/* =========================
-   FORM SUBMISSION
-========================= */
-
 document.getElementById("loaForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
-  // confirm SAME password
   let submitPassword = prompt("Confirm staff password:");
 
   if (submitPassword !== staffPassword) {
@@ -160,7 +150,6 @@ document.getElementById("loaForm").addEventListener("submit", async function(e) 
 
   const roleUsed = validPasswords[staffPassword];
 
-  /* TIME */
   const now = new Date();
   const formattedTime = now.toLocaleString("en-GB", {
     day: "2-digit",
@@ -171,7 +160,6 @@ document.getElementById("loaForm").addEventListener("submit", async function(e) 
     second: "2-digit"
   });
 
-  /* IP */
   let ip = "Unknown";
   try {
     const res = await fetch("https://api.ipify.org?format=json");
