@@ -88,7 +88,7 @@ button:hover {
   <h2>LOA Request</h2>
 
   <div class="warning">
-    ⚠️ STAFF ONLY: Unauthorised access is forbidden. Report any password leaks immediately.
+    ⚠️ STAFF ONLY: Unauthorised access is forbidden. Report password leaks immediately.
   </div>
 
   <form id="loaForm">
@@ -99,45 +99,50 @@ button:hover {
     <input type="text" id="end" placeholder="End Date" required>
     <textarea id="info" placeholder="Other Info"></textarea>
 
-    <button type="submit">Submit</button>
+    <button type="submit">Submit LOA</button>
   </form>
 </div>
 
 <script>
 /* =========================
-   PAGE ACCESS PASSWORD
+   SHARED PASSWORD SYSTEM
 ========================= */
-let pagePass = prompt("Enter page password:");
 
-if (pagePass !== "Samson1322") {
+const validPasswords = {
+  "Samson1322": "Founder / CEO",
+  "101Man101": "Management",
+  "1001BP_STAFF1001": "BP STAFF"
+};
+
+/* =========================
+   PAGE ACCESS (1st check)
+========================= */
+
+let staffPassword = prompt("Enter staff access password:");
+
+if (!validPasswords[staffPassword]) {
   document.body.innerHTML = "<h2 style='color:red;text-align:center;'>Access Denied</h2>";
 }
 
 /* =========================
-   FORM SUBMISSION
+   FORM SUBMISSION (2nd check)
 ========================= */
+
 document.getElementById("loaForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
-  const webhookURL = "https://discord.com/api/webhooks/1498012449776079040/qIgZ5zDiujr0-NC-6MWOz7wXnbg-NYj5JHsfJvwVY7tHd5Nm1vhWbXXSWRg-dA7_ufnO";
+  // confirm SAME password again
+  let submitPassword = prompt("Confirm staff password:");
 
-  /* STAFF PASSWORD (audit only) */
-  const validPasswords = {
-    "Samson1322": "Founder / CEO",
-    "101Man101": "Management",
-    "1001BP_STAFF1001": "BP STAFF"
-  };
-
-  const staffPass = prompt("Enter STAFF LOA password:");
-
-  if (!validPasswords[staffPass]) {
-    alert("Invalid staff password. Submission blocked.");
+  if (submitPassword !== staffPassword) {
+    alert("Password mismatch. Submission blocked.");
     return;
   }
 
-  const passwordRole = validPasswords[staffPass];
+  const webhookURL = "https://discord.com/api/webhooks/1498012449776079040/qIgZ5zDiujr0-NC-6MWOz7wXnbg-NYj5JHsfJvwVY7tHd5Nm1vhWbXXSWRg-dA7_ufnO";
 
-  /* TIME */
+  const roleUsed = validPasswords[staffPassword];
+
   const now = new Date();
   const formattedTime = now.toLocaleString("en-GB", {
     day: "2-digit",
@@ -148,12 +153,11 @@ document.getElementById("loaForm").addEventListener("submit", async function(e) 
     second: "2-digit"
   });
 
-  /* IP */
   let ip = "Unknown";
   try {
     const res = await fetch("https://api.ipify.org?format=json");
-    const ipData = await res.json();
-    ip = ipData.ip;
+    const dataIP = await res.json();
+    ip = dataIP.ip;
   } catch {
     ip = "Failed to fetch";
   }
@@ -172,7 +176,7 @@ document.getElementById("loaForm").addEventListener("submit", async function(e) 
         { name: "Other Info", value: document.getElementById("info").value || "N/A" },
         { name: "Submitted At", value: formattedTime },
         { name: "IP Address", value: ip },
-        { name: "Staff Password Used", value: passwordRole }
+        { name: "Access Level Used", value: roleUsed }
       ]
     }]
   };
