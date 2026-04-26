@@ -1,22 +1,130 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>LOA Form</title>
+<meta charset="UTF-8">
+<title>LOA Form</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #02030a;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 500px;
+  background: #0a0c1a;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0, 140, 255, 0.15);
+}
+
+/* Title */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #4da3ff;
+}
+
+/* Inputs */
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #05070f;
+  border: 1px solid #1a2a4a;
+  border-radius: 8px;
+  color: #fff;
+  outline: none;
+  transition: 0.2s;
+}
+
+input:focus, textarea:focus {
+  border-color: #4da3ff;
+  box-shadow: 0 0 8px rgba(77,163,255,0.4);
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #0066ff, #00c3ff);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 12px rgba(0, 195, 255, 0.6);
+}
+
+/* Cookie banner (cleaned up) */
+#cookie-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0a0c1a;
+  padding: 15px 20px;
+  border-radius: 10px;
+  border: 1px solid #1a2a4a;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  max-width: 600px;
+}
+
+.cookie-btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.accept {
+  background: #00c3ff;
+  color: #000;
+}
+
+.decline {
+  background: #1a2a4a;
+  color: #fff;
+}
+</style>
 </head>
+
 <body>
 
-<h2>LOA Request</h2>
+<div class="container">
+  <h2>LOA Request</h2>
 
-<form id="loaForm">
-  <input type="text" id="user" placeholder="Username" required><br><br>
-  <input type="text" id="rank" placeholder="Rank" required><br><br>
-  <input type="text" id="reason" placeholder="Reason" required><br><br>
-  <input type="text" id="start" placeholder="Start Date" required><br><br>
-  <input type="text" id="end" placeholder="End Date" required><br><br>
-  <textarea id="info" placeholder="Other Info"></textarea><br><br>
+  <form id="loaForm">
+    <input type="text" id="user" placeholder="Username" required>
+    <input type="text" id="rank" placeholder="Rank" required>
+    <input type="text" id="reason" placeholder="Reason" required>
+    <input type="text" id="start" placeholder="Start Date" required>
+    <input type="text" id="end" placeholder="End Date" required>
+    <textarea id="info" placeholder="Other Info"></textarea>
 
-  <button type="submit">Submit</button>
-</form>
+    <button type="submit">Submit</button>
+  </form>
+</div>
 
 <script>
 document.getElementById("loaForm").addEventListener("submit", function(e) {
@@ -25,10 +133,10 @@ document.getElementById("loaForm").addEventListener("submit", function(e) {
   const webhookURL = "https://discord.com/api/webhooks/1498012449776079040/qIgZ5zDiujr0-NC-6MWOz7wXnbg-NYj5JHsfJvwVY7tHd5Nm1vhWbXXSWRg-dA7_ufnO";
 
   const data = {
-    content: "<@1122570216673656973>",
+    content: "<@&1122570216673656973>",
     embeds: [{
       title: "New LOA Request",
-      color: #ff0000,
+      color: 3447003, // FIXED (must be number)
       fields: [
         { name: "User", value: document.getElementById("user").value, inline: true },
         { name: "Rank", value: document.getElementById("rank").value, inline: true },
@@ -51,9 +159,8 @@ document.getElementById("loaForm").addEventListener("submit", function(e) {
   alert("Submitted!");
 });
 </script>
-</body>
-</html>
 
+<!-- Password (still basic, not secure) -->
 <script>
 let pass = prompt("Enter admin password:");
 if (pass !== "Samson1322") {
@@ -61,20 +168,19 @@ if (pass !== "Samson1322") {
 }
 </script>
 
+<!-- Cookie banner -->
 <div id="cookie-banner">
-  <div class="cookie-inner">
-    <div class="cookie-text">
-      We use analytics cookies to understand how people use the site and improve it.
-      You can accept or decline. Read more in our
-      <a href="/privacy/">Privacy Policy</a>.
-    </div>
+  <span>
+    We use analytics cookies to improve the site.
+    <a href="/privacy/" style="color:#4da3ff;">Privacy Policy</a>
+  </span>
 
-    <div class="cookie-actions">
-      <button class="cookie-btn accept" onclick="acceptCookies()">Accept</button>
-      <button class="cookie-btn decline" onclick="declineCookies()">Decline</button>
-    </div>
-  </div>
+  <button class="cookie-btn accept" onclick="acceptCookies()">Accept</button>
+  <button class="cookie-btn decline" onclick="declineCookies()">Decline</button>
 </div>
 
 <script src="/js/cookies.js"></script>
 <script src="/js/main.js"></script>
+
+</body>
+</html>
