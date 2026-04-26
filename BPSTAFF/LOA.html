@@ -88,8 +88,7 @@ button:hover {
   <h2>LOA Request</h2>
 
   <div class="warning">
-    ⚠️ STAFF ONLY: Unauthorised access is forbidden. If you do not belong here, leave immediately.
-    Any password leaks must be reported ASAP.
+    ⚠️ STAFF ONLY: Unauthorised access is forbidden. Report any password leaks immediately.
   </div>
 
   <form id="loaForm">
@@ -105,28 +104,40 @@ button:hover {
 </div>
 
 <script>
+/* =========================
+   PAGE ACCESS PASSWORD
+========================= */
+let pagePass = prompt("Enter page password:");
+
+if (pagePass !== "Samson1322") {
+  document.body.innerHTML = "<h2 style='color:red;text-align:center;'>Access Denied</h2>";
+}
+
+/* =========================
+   FORM SUBMISSION
+========================= */
 document.getElementById("loaForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
   const webhookURL = "https://discord.com/api/webhooks/1498012449776079040/qIgZ5zDiujr0-NC-6MWOz7wXnbg-NYj5JHsfJvwVY7tHd5Nm1vhWbXXSWRg-dA7_ufnO";
 
-  // PASSWORD SYSTEM (audit only)
+  /* STAFF PASSWORD (audit only) */
   const validPasswords = {
-    "Samson1322": "Owner",
-    "BPStaff2026": "Management",
-    "LOAAccess77": "Moderator"
+    "Samson1322": "Founder / CEO",
+    "101Man101": "Management",
+    "1001BP_STAFF1001": "BP STAFF"
   };
 
-  const enteredPassword = prompt("Enter staff password:");
+  const staffPass = prompt("Enter STAFF LOA password:");
 
-  if (!validPasswords[enteredPassword]) {
-    alert("Incorrect password. Submission blocked.");
+  if (!validPasswords[staffPass]) {
+    alert("Invalid staff password. Submission blocked.");
     return;
   }
 
-  const passwordRole = validPasswords[enteredPassword];
+  const passwordRole = validPasswords[staffPass];
 
-  // TIME
+  /* TIME */
   const now = new Date();
   const formattedTime = now.toLocaleString("en-GB", {
     day: "2-digit",
@@ -137,12 +148,12 @@ document.getElementById("loaForm").addEventListener("submit", async function(e) 
     second: "2-digit"
   });
 
-  // IP
+  /* IP */
   let ip = "Unknown";
   try {
     const res = await fetch("https://api.ipify.org?format=json");
-    const dataIP = await res.json();
-    ip = dataIP.ip;
+    const ipData = await res.json();
+    ip = ipData.ip;
   } catch {
     ip = "Failed to fetch";
   }
@@ -161,7 +172,7 @@ document.getElementById("loaForm").addEventListener("submit", async function(e) 
         { name: "Other Info", value: document.getElementById("info").value || "N/A" },
         { name: "Submitted At", value: formattedTime },
         { name: "IP Address", value: ip },
-        { name: "Password Used", value: passwordRole }
+        { name: "Staff Password Used", value: passwordRole }
       ]
     }]
   };
