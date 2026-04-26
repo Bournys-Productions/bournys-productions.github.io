@@ -28,14 +28,14 @@ body {
   background: #0a0c1a;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 0 25px rgba(0, 140, 255, 0.15);
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.15);
 }
 
 /* Title */
 h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #4da3ff;
+  color: #ff4d4d;
 }
 
 /* Inputs */
@@ -44,7 +44,7 @@ input, textarea {
   padding: 12px;
   margin-bottom: 12px;
   background: #05070f;
-  border: 1px solid #1a2a4a;
+  border: 1px solid #3a1a1a;
   border-radius: 8px;
   color: #fff;
   outline: none;
@@ -52,8 +52,8 @@ input, textarea {
 }
 
 input:focus, textarea:focus {
-  border-color: #4da3ff;
-  box-shadow: 0 0 8px rgba(77,163,255,0.4);
+  border-color: #ff4d4d;
+  box-shadow: 0 0 8px rgba(255,77,77,0.4);
 }
 
 /* Button */
@@ -62,7 +62,7 @@ button {
   padding: 14px;
   border: none;
   border-radius: 8px;
-  background: linear-gradient(90deg, #0066ff, #00c3ff);
+  background: linear-gradient(90deg, #990000, #ff1a1a);
   color: #fff;
   font-weight: bold;
   cursor: pointer;
@@ -71,10 +71,10 @@ button {
 
 button:hover {
   transform: scale(1.03);
-  box-shadow: 0 0 12px rgba(0, 195, 255, 0.6);
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
 }
 
-/* Cookie banner (cleaned up) */
+/* Cookie banner */
 #cookie-banner {
   position: fixed;
   bottom: 20px;
@@ -83,7 +83,7 @@ button:hover {
   background: #0a0c1a;
   padding: 15px 20px;
   border-radius: 10px;
-  border: 1px solid #1a2a4a;
+  border: 1px solid #3a1a1a;
   display: flex;
   gap: 15px;
   align-items: center;
@@ -98,13 +98,17 @@ button:hover {
 }
 
 .accept {
-  background: #00c3ff;
-  color: #000;
+  background: #ff1a1a;
+  color: #fff;
 }
 
 .decline {
-  background: #1a2a4a;
+  background: #2a0f0f;
   color: #fff;
+}
+
+a {
+  color: #ff4d4d;
 }
 </style>
 </head>
@@ -136,7 +140,7 @@ document.getElementById("loaForm").addEventListener("submit", function(e) {
     content: "<@&1122570216673656973>",
     embeds: [{
       title: "New LOA Request",
-      color: 3447003, // FIXED (must be number)
+      color: 16711680, // RED
       fields: [
         { name: "User", value: document.getElementById("user").value, inline: true },
         { name: "Rank", value: document.getElementById("rank").value, inline: true },
@@ -160,7 +164,6 @@ document.getElementById("loaForm").addEventListener("submit", function(e) {
 });
 </script>
 
-<!-- Password (still basic, not secure) -->
 <script>
 let pass = prompt("Enter admin password:");
 if (pass !== "Samson1322") {
@@ -168,11 +171,10 @@ if (pass !== "Samson1322") {
 }
 </script>
 
-<!-- Cookie banner -->
 <div id="cookie-banner">
   <span>
     We use analytics cookies to improve the site.
-    <a href="/privacy/" style="color:#4da3ff;">Privacy Policy</a>
+    <a href="/privacy/">Privacy Policy</a>
   </span>
 
   <button class="cookie-btn accept" onclick="acceptCookies()">Accept</button>
