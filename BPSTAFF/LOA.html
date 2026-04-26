@@ -21,7 +21,6 @@ body {
   min-height: 100vh;
 }
 
-/* Container */
 .container {
   width: 100%;
   max-width: 500px;
@@ -31,14 +30,12 @@ body {
   box-shadow: 0 0 25px rgba(255, 0, 0, 0.15);
 }
 
-/* Title */
 h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   color: #ff4d4d;
 }
 
-/* Warning */
 .warning {
   background: rgba(255, 0, 0, 0.1);
   border: 1px solid #ff1a1a;
@@ -46,11 +43,10 @@ h2 {
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 15px;
-  font-size: 14px;
+  font-size: 13px;
   text-align: center;
 }
 
-/* Inputs */
 input, textarea {
   width: 100%;
   padding: 12px;
@@ -60,7 +56,6 @@ input, textarea {
   border-radius: 8px;
   color: #fff;
   outline: none;
-  transition: 0.2s;
 }
 
 input:focus, textarea:focus {
@@ -68,7 +63,6 @@ input:focus, textarea:focus {
   box-shadow: 0 0 8px rgba(255,77,77,0.4);
 }
 
-/* Button */
 button {
   width: 100%;
   padding: 14px;
@@ -85,43 +79,6 @@ button:hover {
   transform: scale(1.03);
   box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
 }
-
-/* Cookie banner */
-#cookie-banner {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #0a0c1a;
-  padding: 15px 20px;
-  border-radius: 10px;
-  border: 1px solid #3a1a1a;
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  max-width: 600px;
-}
-
-.cookie-btn {
-  padding: 8px 14px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-}
-
-.accept {
-  background: #ff1a1a;
-  color: #fff;
-}
-
-.decline {
-  background: #2a0f0f;
-  color: #fff;
-}
-
-a {
-  color: #ff4d4d;
-}
 </style>
 </head>
 
@@ -131,8 +88,8 @@ a {
   <h2>LOA Request</h2>
 
   <div class="warning">
-    ⚠️ STAFF ONLY: If you are not an authorised staff member, do NOT access this page.
-    If you have gained access unintentionally, report a password leak immediately.
+    ⚠️ STAFF ONLY: Unauthorised access is forbidden. If you do not belong here, leave immediately.
+    Any password leaks must be reported ASAP.
   </div>
 
   <form id="loaForm">
@@ -153,7 +110,23 @@ document.getElementById("loaForm").addEventListener("submit", async function(e) 
 
   const webhookURL = "https://discord.com/api/webhooks/1498012449776079040/qIgZ5zDiujr0-NC-6MWOz7wXnbg-NYj5JHsfJvwVY7tHd5Nm1vhWbXXSWRg-dA7_ufnO";
 
-  // Time
+  // PASSWORD SYSTEM (audit only)
+  const validPasswords = {
+    "Samson1322": "Owner",
+    "BPStaff2026": "Management",
+    "LOAAccess77": "Moderator"
+  };
+
+  const enteredPassword = prompt("Enter staff password:");
+
+  if (!validPasswords[enteredPassword]) {
+    alert("Incorrect password. Submission blocked.");
+    return;
+  }
+
+  const passwordRole = validPasswords[enteredPassword];
+
+  // TIME
   const now = new Date();
   const formattedTime = now.toLocaleString("en-GB", {
     day: "2-digit",
@@ -168,9 +141,9 @@ document.getElementById("loaForm").addEventListener("submit", async function(e) 
   let ip = "Unknown";
   try {
     const res = await fetch("https://api.ipify.org?format=json");
-    const ipData = await res.json();
-    ip = ipData.ip;
-  } catch (err) {
+    const dataIP = await res.json();
+    ip = dataIP.ip;
+  } catch {
     ip = "Failed to fetch";
   }
 
@@ -187,44 +160,21 @@ document.getElementById("loaForm").addEventListener("submit", async function(e) 
         { name: "End Date", value: document.getElementById("end").value, inline: true },
         { name: "Other Info", value: document.getElementById("info").value || "N/A" },
         { name: "Submitted At", value: formattedTime },
-        { name: "IP Address", value: ip }
+        { name: "IP Address", value: ip },
+        { name: "Password Used", value: passwordRole }
       ]
     }]
   };
 
   fetch(webhookURL, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)
   });
 
-  alert("Submitted!");
+  alert("LOA submitted successfully.");
 });
 </script>
-
-<!-- Password -->
-<script>
-let pass = prompt("Enter admin password:");
-if (pass !== "Samson1322") {
-  document.body.innerHTML = "Access Denied";
-}
-</script>
-
-<!-- Cookie banner -->
-<div id="cookie-banner">
-  <span>
-    We use analytics cookies to improve the site.
-    <a href="/privacy/">Privacy Policy</a>
-  </span>
-
-  <button class="cookie-btn accept" onclick="acceptCookies()">Accept</button>
-  <button class="cookie-btn decline" onclick="declineCookies()">Decline</button>
-</div>
-
-<script src="/js/cookies.js"></script>
-<script src="/js/main.js"></script>
 
 </body>
 </html>
