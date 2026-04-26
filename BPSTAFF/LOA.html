@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LOA Form</title>
 
 <style>
@@ -19,13 +20,14 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  padding: 20px;
 }
 
 .container {
   width: 100%;
   max-width: 500px;
   background: #0a0c1a;
-  padding: 30px;
+  padding: 25px;
   border-radius: 12px;
   box-shadow: 0 0 25px rgba(255, 0, 0, 0.15);
 }
@@ -56,6 +58,7 @@ input, textarea {
   border-radius: 8px;
   color: #fff;
   outline: none;
+  font-size: 16px;
 }
 
 input:focus, textarea:focus {
@@ -78,6 +81,20 @@ button {
 button:hover {
   transform: scale(1.03);
   box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 18px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  button {
+    padding: 12px;
+  }
 }
 </style>
 </head>
@@ -115,7 +132,7 @@ const validPasswords = {
 };
 
 /* =========================
-   PAGE ACCESS (1st check)
+   PAGE ACCESS
 ========================= */
 
 let staffPassword = prompt("Enter staff access password:");
@@ -125,13 +142,13 @@ if (!validPasswords[staffPassword]) {
 }
 
 /* =========================
-   FORM SUBMISSION (2nd check)
+   FORM SUBMISSION
 ========================= */
 
 document.getElementById("loaForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
-  // confirm SAME password again
+  // confirm SAME password
   let submitPassword = prompt("Confirm staff password:");
 
   if (submitPassword !== staffPassword) {
@@ -143,6 +160,7 @@ document.getElementById("loaForm").addEventListener("submit", async function(e) 
 
   const roleUsed = validPasswords[staffPassword];
 
+  /* TIME */
   const now = new Date();
   const formattedTime = now.toLocaleString("en-GB", {
     day: "2-digit",
@@ -153,6 +171,7 @@ document.getElementById("loaForm").addEventListener("submit", async function(e) 
     second: "2-digit"
   });
 
+  /* IP */
   let ip = "Unknown";
   try {
     const res = await fetch("https://api.ipify.org?format=json");
