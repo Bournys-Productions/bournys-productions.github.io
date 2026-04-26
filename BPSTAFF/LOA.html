@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LOA Form</title>
+</head>
+<body>
+
+<h2>LOA Request</h2>
+
+<form id="loaForm">
+  <input type="text" id="user" placeholder="Username" required><br><br>
+  <input type="text" id="rank" placeholder="Rank" required><br><br>
+  <input type="text" id="reason" placeholder="Reason" required><br><br>
+  <input type="text" id="start" placeholder="Start Date" required><br><br>
+  <input type="text" id="end" placeholder="End Date" required><br><br>
+  <textarea id="info" placeholder="Other Info"></textarea><br><br>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+document.getElementById("loaForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const webhookURL = "PASTE_YOUR_WEBHOOK_URL_HERE";
+
+  const data = {
+    content: "<@&ROLE_ID_HERE>",
+    embeds: [{
+      title: "New LOA Request",
+      color: 3447003,
+      fields: [
+        { name: "User", value: document.getElementById("user").value, inline: true },
+        { name: "Rank", value: document.getElementById("rank").value, inline: true },
+        { name: "Reason", value: document.getElementById("reason").value },
+        { name: "Start Date", value: document.getElementById("start").value, inline: true },
+        { name: "End Date", value: document.getElementById("end").value, inline: true },
+        { name: "Other Info", value: document.getElementById("info").value || "N/A" }
+      ]
+    }]
+  };
+
+  fetch(webhookURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
+
+  alert("Submitted!");
+});
+</script>
+
+</body>
+</html>
