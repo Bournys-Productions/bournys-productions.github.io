@@ -1,242 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GAP | Bournys Productions</title>
-  <link rel="stylesheet" href="/css/style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GAP | Bournys Productions</title>
 
-  <style>
-    /* ONLY affects this page */
+<link rel="stylesheet" href="/css/style.css" />
 
-    .page {
-      position: relative;
-      z-index: 1;
-    }
+<style>
+/* ===================== BASE ===================== */
 
-    .hero-simple {
-      text-align: center;
-      padding: 120px 20px 40px;
-    }
+.page {
+  position: relative;
+  z-index: 1;
+}
 
-    .hero-simple h2 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 12px;
-    }
+.hero-simple {
+  text-align: center;
+  padding: 120px 20px 40px;
+}
 
-    .hero-simple p {
-      font-size: 1rem;
-      color: rgba(255, 255, 255, 0.75);
-      max-width: 700px;
-      margin: 0 auto;
-    }
+.hero-simple h2 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+}
 
-    .back-wrap {
-      display: flex;
-      justify-content: center;
-      margin: 20px 0 70px;
-    }
+.hero-simple p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 700px;
+  margin: 0 auto;
+}
 
-    .back-btn {
-      display: inline-block;
-      padding: 14px 34px;
-      font-size: 15px;
-      font-weight: 700;
-      color: #fff;
-      background: linear-gradient(135deg, #ff1a1a, #990000);
-      border-radius: 12px;
-      text-decoration: none;
-      box-shadow: 0 0 16px rgba(255, 0, 0, 0.45);
-      transition: all 0.25s ease;
-    }
+/* ===================== BACK BUTTON ===================== */
 
-    .back-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 22px rgba(255, 0, 0, 0.75);
-      background: linear-gradient(135deg, #ff3333, #cc0000);
-    }
+.back-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 70px;
+}
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+.back-btn {
+  display: inline-block;
+  padding: 14px 34px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #ff1a1a, #990000);
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 0 16px rgba(255, 0, 0, 0.45);
+  transition: all 0.25s ease;
+}
 
-    .section-title h3 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 800;
-      color: #fff;
-      position: relative;
-      display: inline-block;
-      margin: 0;
-    }
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 22px rgba(255, 0, 0, 0.75);
+  background: linear-gradient(135deg, #ff3333, #cc0000);
+}
 
-    .section-title h3::after {
-      content: "";
-      display: block;
-      width: 90px;
-      height: 4px;
-      margin: 14px auto 0;
-      border-radius: 999px;
-      background: linear-gradient(90deg, transparent, #ff2a2a, transparent);
-      box-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
-    }
+/* ===================== GRID ===================== */
 
-    .product-grid {
-      display: flex;
-      justify-content: center;
-      align-items: stretch;
-      flex-wrap: wrap;
-      gap: 28px;
-      padding: 0 20px 80px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  gap: 28px;
+  padding: 0 20px 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+  justify-items: center;
+}
 
-    .product-card {
-      width: 320px;
-      min-height: 220px;
-      border-radius: 22px;
-      background: rgba(18, 18, 30, 0.88);
-      border: 1px solid rgba(255, 255, 255, 0.04);
-      box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.35),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.015);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+/* ===================== CARDS ===================== */
 
-    .product-card:hover {
-      transform: translateY(-6px);
-      box-shadow:
-        0 16px 35px rgba(0, 0, 0, 0.45),
-        0 0 20px rgba(255, 0, 0, 0.12);
-    }
+.product-card {
+  width: 100%;
+  max-width: 320px;
+  min-height: 220px;
+  border-radius: 22px;
+  background: rgba(18, 18, 30, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 
-    .product-content {
-      padding: 30px 24px;
-      width: 100%;
-    }
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 16px 35px rgba(0, 0, 0, 0.45),
+    0 0 20px rgba(255, 0, 0, 0.12);
+}
 
-    .product-content h4 {
-      font-size: 1.8rem;
-      color: #fff;
-      margin: 0 0 12px;
-      font-weight: 800;
-    }
+.product-content {
+  padding: 30px 24px;
+  width: 100%;
+}
 
-    .product-content p {
-      font-size: 1rem;
-      color: rgba(255, 255, 255, 0.72);
-      margin: 0 0 24px;
-      line-height: 1.5;
-    }
+.product-content h4 {
+  font-size: 1.8rem;
+  color: #fff;
+  margin: 0 0 12px;
+  font-weight: 800;
+}
 
-    .view-btn {
-      display: inline-block;
-      padding: 12px 26px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #fff;
-      text-decoration: none;
-      background: #ff2b2b;
-      border-radius: 12px;
-      box-shadow: 0 0 14px rgba(255, 0, 0, 0.25);
-      transition: all 0.25s ease;
-    }
+.product-content p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0 0 24px;
+  line-height: 1.5;
+}
 
-    .view-btn:hover {
-      transform: translateY(-2px);
-      background: #ff3b3b;
-      box-shadow: 0 0 18px rgba(255, 0, 0, 0.45);
-    }
+.view-btn {
+  display: inline-block;
+  padding: 12px 26px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  background: #ff2b2b;
+  border-radius: 12px;
+  box-shadow: 0 0 14px rgba(255, 0, 0, 0.25);
+  transition: all 0.25s ease;
+}
 
-    @media (max-width: 768px) {
-      .hero-simple {
-        padding: 100px 16px 30px;
-      }
+.view-btn:hover {
+  transform: translateY(-2px);
+  background: #ff3b3b;
+  box-shadow: 0 0 18px rgba(255, 0, 0, 0.45);
+}
 
-      .back-wrap {
-        margin: 15px 0 50px;
-      }
+/* ===================== RESPONSIVE ===================== */
 
-      .product-grid {
-        padding: 0 16px 60px;
-        gap: 20px;
-      }
+@media (max-width: 900px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
-      .product-card {
-        width: 100%;
-        max-width: 340px;
-        min-height: 200px;
-      }
+@media (max-width: 600px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
 
-      .product-content h4 {
-        font-size: 1.5rem;
-      }
-    }
-  </style>
+  .hero-simple {
+    padding: 100px 16px 30px;
+  }
+
+  .back-wrap {
+    margin: 15px 0 50px;
+  }
+}
+
+</style>
 </head>
 
 <body>
-  <canvas id="particle-canvas"></canvas>
 
-  <header class="topbar">
-    <button class="menu-btn" id="menuToggle" aria-label="Open menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <h1 class="topbar-title">BOURNYS PRODUCTIONS</h1>
-  </header>
+<canvas id="particle-canvas"></canvas>
 
-  <nav class="sidebar" id="sidebar">
+<header class="topbar">
+  <button class="menu-btn" id="menuToggle" aria-label="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <h1 class="topbar-title">BOURNYS PRODUCTIONS</h1>
+</header>
 
-  </nav>
+<nav class="sidebar" id="sidebar"></nav>
 
-  <main class="page">
-    <section class="hero-simple">
-      <h2>Game Assist Program</h2>
-      <p></p>
-    </section>
+<main class="page">
 
-    <div class="back-wrap">
-      <a href="/" class="back-btn">← Back</a>
+  <section class="hero-simple">
+    <h2>Game Assist Program</h2>
+    <p></p>
+  </section>
+
+  <div class="back-wrap">
+    <a href="/" class="back-btn">← Back</a>
+  </div>
+
+  <section class="product-grid">
+
+    <div class="product-card">
+      <div class="product-content">
+        <h4>GAP Terms</h4>
+        <p>Click to read more.</p>
+        <a href="/GAP/Terms" class="view-btn">Read More</a>
+      </div>
     </div>
 
-    <section class="product-grid">
-      <div class="product-card">
-        <div class="product-content">
-          <h4>GAP Terms</h4>
-          <p>Click to read more.</p>
-          <a href="/GAP/Terms" class="view-btn">Read More</a>
-        </div>
+    <div class="product-card">
+      <div class="product-content">
+        <h4>GAP Services</h4>
+        <p>Click to read more.</p>
+        <a href="/GAP/Services" class="view-btn">Read More</a>
       </div>
+    </div>
 
-          <section class="product-grid">
-      <div class="product-card">
-        <div class="product-content">
-          <h4>GAP Services</h4>
-          <p>Click to read more.</p>
-          <a href="/GAP/Services" class="view-btn">Read More</a>
-        </div>
+    <div class="product-card">
+      <div class="product-content">
+        <h4>GAP Application Form</h4>
+        <p>Click to read more.</p>
+        <a href="/GAP/Application-Form" class="view-btn">Read More</a>
       </div>
+    </div>
 
-        <section class="product-grid">
-      <div class="product-card">
-        <div class="product-content">
-          <h4>GAP Application Form</h4>
-          <p>Click to read more.</p>
-          <a href="/GAP/Application-Form" class="view-btn">Read More</a>
-        </div>
-      </div>
-  </main>
+  </section>
+
+</main>
 
 <div id="cookie-banner">
   <div class="cookie-inner">
@@ -255,5 +237,6 @@
 
 <script src="/js/cookies.js"></script>
 <script src="/js/main.js"></script>
+
 </body>
 </html>
