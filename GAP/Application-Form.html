@@ -138,6 +138,7 @@ button:hover {
     <input type="text" id="project" placeholder="Game / Project Name" required>
     <input type="text" id="goals" placeholder="Overall Goals" required>
     <input type="text" id="services" placeholder="Services Wanting" required>
+    <input type="text" id="funding" placeholder="Ammount available for project" required>
     <textarea id="info" placeholder="Other Info (More the better)"></textarea>
 
     <button type="submit">Submit LOA</button>
@@ -186,6 +187,7 @@ document.getElementById("loaForm").addEventListener("submit", async function(e) 
         { name: "Game / Project Name", value: document.getElementById("project").value },
         { name: "Overall Goals", value: document.getElementById("goals").value, inline: true },
         { name: "Services Wanting", value: document.getElementById("services").value, inline: true },
+        { name: "Ammount of funding", value: document.getElementById("funding").value, inline: true },
         { name: "Other Info", value: document.getElementById("info").value || "N/A" },
         { name: "Submitted At", value: formattedTime },
         { name: "IP Address", value: ip }
