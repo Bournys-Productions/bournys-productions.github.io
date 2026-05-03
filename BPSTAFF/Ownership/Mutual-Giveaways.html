@@ -29,7 +29,8 @@ button{width:100%;padding:14px;border:none;border-radius:8px;background:linear-g
   </div>
 
   <div class="total-box">
-    Total Spent: £<span id="totalSpent">0</span>
+    GBP Total: £<span id="gbpTotal">0</span><br>
+    Robux Total: R$<span id="robuxTotal">0</span>
   </div>
 
   <form id="giveawayForm">
@@ -39,8 +40,13 @@ button{width:100%;padding:14px;border:none;border-radius:8px;background:linear-g
       <option value="Solo">Solo Giveaway</option>
     </select>
 
+    <select id="currency">
+      <option value="GBP">GBP (£)</option>
+      <option value="ROBUX">Robux (R$)</option>
+    </select>
+
     <input type="text" id="product" placeholder="Product Name" required>
-    <input type="number" id="price" placeholder="Price (£)" required>
+    <input type="number" id="price" placeholder="Price" required>
     <input type="number" id="quantity" placeholder="Quantity" value="1">
 
     <input type="text" id="platform" placeholder="Platform (Discord, Roblox, etc)" required>
@@ -54,7 +60,7 @@ button{width:100%;padding:14px;border:none;border-radius:8px;background:linear-g
 
 <script>
 
-// 🔐 password system
+// password system
 const validPasswords = {
   "Samson1322": "Founder / CEO"
 };
@@ -65,11 +71,14 @@ if (!validPasswords[staffPassword]) {
   document.body.innerHTML = "<h2 style='color:red;text-align:center;'>Access Denied</h2>";
 }
 
-// 💰 total tracker
-let totalSpent = localStorage.getItem("totalSpent") || 0;
-document.getElementById("totalSpent").innerText = totalSpent;
+// totals
+let gbpTotal = parseFloat(localStorage.getItem("gbpTotal")) || 0;
+let robuxTotal = parseFloat(localStorage.getItem("robuxTotal")) || 0;
 
-// 📤 submit handler
+document.getElementById("gbpTotal").innerText = gbpTotal.toFixed(2);
+document.getElementById("robuxTotal").innerText = robuxTotal.toFixed(2);
+
+// submit
 document.getElementById("giveawayForm").addEventListener("submit", async (e)=>{
   e.preventDefault();
 
@@ -80,6 +89,7 @@ document.getElementById("giveawayForm").addEventListener("submit", async (e)=>{
   }
 
   const type = document.getElementById("type").value;
+  const currency = document.getElementById("currency").value;
 
   let webhookURL = type === "Mutual"
     ? "https://discord.com/api/webhooks/1500440450291728486/8smqH0XQLPOoRkTYXi7UogyQykEwLKkr1tLek5iMxcjtYtHXEP7I6C3HhpXEbqUSM4iO"
@@ -90,31 +100,42 @@ document.getElementById("giveawayForm").addEventListener("submit", async (e)=>{
 
   const totalCost = price * qty;
 
-  totalSpent = parseFloat(totalSpent) + totalCost;
-  localStorage.setItem("totalSpent", totalSpent);
-  document.getElementById("totalSpent").innerText = totalSpent.toFixed(2);
+  // update correct total
+  if (currency === "GBP") {
+    gbpTotal += totalCost;
+    localStorage.setItem("gbpTotal", gbpTotal);
+    document.getElementById("gbpTotal").innerText = gbpTotal.toFixed(2);
+  } else {
+    robuxTotal += totalCost;
+    localStorage.setItem("robuxTotal", robuxTotal);
+    document.getElementById("robuxTotal").innerText = robuxTotal.toFixed(2);
+  }
 
+  const symbol = currency === "GBP" ? "£" : "R$";
   const now = new Date().toLocaleString("en-GB");
 
   const data = {
     embeds:[{
       title:"🎁 Giveaway Logged",
-      color:type==="Mutual"?16753920:16711680,
+      color:16711680,
       fields:[
         {name:"Type",value:type,inline:true},
+        {name:"Currency",value:symbol,inline:true},
 
         {name:"Product",value:document.getElementById("product").value},
-        {name:"Price Each",value:"£"+price,inline:true},
+        {name:"Price Each",value:symbol + price,inline:true},
         {name:"Quantity",value:qty.toString(),inline:true},
 
-        {name:"Total Cost",value:"£"+totalCost.toFixed(2)},
+        {name:"Total Cost",value:symbol + totalCost.toFixed(2)},
 
         {name:"Winner",value:document.getElementById("winner").value},
         {name:"Platform",value:document.getElementById("platform").value},
 
         {name:"Notes",value:document.getElementById("notes").value||"N/A"},
 
-        {name:"Total Spent (All Time)",value:"£"+totalSpent.toFixed(2)},
+        {name:"GBP Total",value:"£" + gbpTotal.toFixed(2)},
+        {name:"Robux Total",value:"R$" + robuxTotal.toFixed(2)},
+
         {name:"Time",value:now},
         {name:"Access Level",value:validPasswords[staffPassword]}
       ]
